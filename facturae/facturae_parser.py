@@ -14,6 +14,7 @@ class FacturaeParser(object):
             self.sollicitud = self.xml_dict.get('BatchIdentifier', False)
             self.num_factures = self.xml_dict.get('InvoicesCount', False)
             self.total_factures = self.xml_dict.get('TotalInvoicesAmount', False)
+            self.total_executable = self.xml_dict.get('TotalExecutableAmount', False)
             self.seller = self.xml_dict.get('seller', False)
             self.buyer = self.xml_dict.get('buyer', False)
             self.issuer_type = self.xml_dict.get('InvoiceIssuerType')
@@ -173,11 +174,13 @@ class FacturaeParser(object):
                     'TotalTaxOutputs': invoice_totals.TotalTaxOutputs.text if invoice_totals.find(
                         'TotalTaxOutputs') is not None else False,
                     'TotalTaxesWithheld': invoice_totals.TotalTaxesWithheld.text if invoice_totals.find(
-                        'TotalTaxesWithheld') is not None else False,
+                        'TotalTaxesWithheld') is not None else None,
                     'InvoiceTotal': invoice_totals.InvoiceTotal.text if invoice_totals.find(
                         'InvoiceTotal') is not None else False,
                     'TotalOutstandingAmount': invoice_totals.TotalOutstandingAmount.text if invoice_totals.find(
                         'TotalOutstandingAmount') is not None else False,
+                    'AmountsWithheld': self._get_amounts_with_held(invoice_totals.AmountsWithheld) if invoice_totals.find(
+                        'AmountsWithheld') is not None else None,
                     'TotalExecutableAmount': invoice_totals.TotalExecutableAmount.text if invoice_totals.find(
                         'TotalExecutableAmount') is not None else False,
                 })
@@ -221,6 +224,19 @@ class FacturaeParser(object):
             res['Invoices'].append(invoice_res)
 
         return res
+
+    def _get_amounts_with_held(self, amountwhitheld):
+
+        amounts_with_held = {
+            'WithholdingReason': amountwhitheld.WithholdingReason.text if amountwhitheld.find(
+                'WithholdingReason') is not None else None,
+            'WithholdingRate': amountwhitheld.WithholdingRate.text if amountwhitheld.find(
+                'WithholdingRate') is not None else None,
+            'WithholdingAmount': amountwhitheld.WithholdingAmount.text if amountwhitheld.find(
+                'WithholdingAmount') is not None else None
+        }
+
+        return amounts_with_held
 
     def _get_taxes(self, taxes):
         res = []
