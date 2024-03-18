@@ -4,6 +4,7 @@ from libcomxml.core import XmlModel, XmlField
 from .utils import FacturaeUtils
 from signxml import XMLSigner, XMLVerifier
 from xml.etree import ElementTree
+from . import extensions
 
 class FacturaeRoot(XmlModel):
     _sort_order = ('root', 'fileheader', 'parties', 'invoices')
@@ -18,6 +19,7 @@ class FacturaeRoot(XmlModel):
         self.fileheader = FileHeader()
         self.parties = Parties()
         self.invoices = Invoices()
+        self.extensions = extensions.Extensions()
         super(FacturaeRoot, self).__init__('Facturae', 'root')
 
     def sign(self, certificate, password):

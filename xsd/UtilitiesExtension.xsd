@@ -1,0 +1,3274 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			xmlns="http://www.facturae.es/Facturae/Extensions/Utilities" 
+			targetNamespace="http://www.facturae.es/Facturae/Extensions/Utilities">
+	
+  <xs:element name="UtilitiesExtensionsELE">
+		<xs:annotation>
+			<xs:documentation xml:lang="en"> Element ORIGIN of Utilities Extension. </xs:documentation>
+			<xs:documentation xml:lang="es"> Elemento ORIGEN de la Extension de las Utilities. </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Version" type="TextMax10Type" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+					<xs:annotation>
+						<xs:documentation xml:lang="en"> Version. </xs:documentation>
+						<xs:documentation xml:lang="es"> Versión. </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="UtilitiesFacturaResumen" type="UtilitiesFacturaResumenType" minOccurs="1" maxOccurs="1">
+					<xs:annotation>
+						<xs:documentation xml:lang="en"> TRADUCIR:Element ORIGIN of Factura Resumen. </xs:documentation>
+						<xs:documentation xml:lang="es"> Elemento ORIGEN de la Factura Resumen. </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="UtilitiesExtensionELE" type="UtilitiesExtensionELECompletaType" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation xml:lang="en"> TRADUCIR:Element ORIGIN of Utilities Extension. </xs:documentation>
+						<xs:documentation xml:lang="es"> Elemento ORIGEN de la Extension de Electricidad. </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<!-- Complex Types -->
+	<xs:complexType name="UtilitiesFacturaResumenType">
+		<xs:sequence>
+			<xs:element name="FacturaResumen" type="SiNoType" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> TRADUCIR: Factura Resumen. </xs:documentation>
+					<xs:documentation xml:lang="es"> Factura Resumen. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ConceptosFR" type="ConceptosFRType" minOccurs="0" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> TRADUCIR: Conceptos FR. </xs:documentation>
+					<xs:documentation xml:lang="es"> Conceptos FR. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TotalAntesImpuestos" type="DoubleTwoDecimalType" minOccurs="0" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> TRADUCIR: Total Antes de Impuestos. </xs:documentation>
+					<xs:documentation xml:lang="es"> Total Antes de Impuestos. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ImpuestosFR" type="ImpuestosType" minOccurs="0" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> TRADUCIR: Impuestos FR. </xs:documentation>
+					<xs:documentation xml:lang="es"> Impuestos FR. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ConceptosFRType">
+		<xs:sequence>
+			<!-- ORIGINAL: --> <!-- <xs:element name="ConceptoFR" type="ConceptoFRType" minOccurs="0"> --> <!-- jcyl_eren corrección: el maxOccurs por defecto es 1, pero en este caso pueden ser varios, se cambia a unbounded -->
+			<xs:element name="ConceptoFR" type="ConceptoFRType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> TRADUCIR: Concepto FR. </xs:documentation>
+					<xs:documentation xml:lang="es"> Concepto FR. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ConceptoFRType">
+		<xs:sequence>
+			<!-- ORIGINAL: -->  <!-- <xs:element name="ConceptoFacturadoFR" type="TextMax50Type" minOccurs="0" maxOccurs="1"> -->
+			<xs:element name="ConceptoFacturadoFR" type="TextMax50Type" minOccurs="1" maxOccurs="1">  <!-- jcyl_eren correción: si existe el nivel superior "ConceptoFRType", ConceptoFacturadoFR es obligatorio, minOccurs = 1 -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> TRADUCIR: Concepto Facturado FR. </xs:documentation>
+					<xs:documentation xml:lang="es"> Concepto Facturado FR. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<!-- ORIGINAL: -->  <!-- <xs:element name="TipoConceptoFacturadoFR" type="U7_Type" minOccurs="0" maxOccurs="1"> -->
+			<xs:element name="TipoConceptoFacturadoFR" type="U7_Type" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren correción: si existe el nivel superior "ConceptoFRType", TipoConceptoFacturadoFR es obligatorio, minOccurs = 1 -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> TRADUCIR: Tipo Concepto Facturado FR. </xs:documentation>
+					<xs:documentation xml:lang="es"> Tipo Concepto Facturado FR. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<!-- ORIGINAL: -->  <!-- <xs:element name="Importe" type="DoubleTwoDecimalType" minOccurs="0" maxOccurs="1"> -->
+			<xs:element name="Importe" type="DoubleTwoDecimalType" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren correción: si existe el nivel superior "ConceptoFRType", Importe es obligatorio, minOccurs = 1 -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> TRADUCIR: Importe. </xs:documentation>
+					<xs:documentation xml:lang="es"> Importe. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="UtilitiesExtensionELECompletaType">
+		<xs:sequence>
+			<xs:element name="TipoExtension" type="TipoExtensionCompletaType" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Extension Type. </xs:documentation>
+					<xs:documentation xml:lang="es"> Tipo Extensión. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DatosDelSuministro" type="DatosDelSuministroType" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Data supply. </xs:documentation>
+					<xs:documentation xml:lang="es"> Datos del suministro. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="UtilitiesMedida" type="UtilitiesMedidaType" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Measure. </xs:documentation>
+					<xs:documentation xml:lang="es"> Medida. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<!-- ORIGINAL: --> <!--<xs:element name="UtilitiesDesgloseConceptosFactura" type="UtilitiesDesgloseConceptosFacturaType" maxOccurs="unbounded" minOccurs="1">--> 
+			<xs:element name="UtilitiesDesgloseConceptosFactura" type="UtilitiesDesgloseConceptosFacturaType" maxOccurs="1" minOccurs="1"> <!-- jcyl_eren corrección : A este nivel, maxOccurs = 1 (ya q a un nivel inferior DesgloseConceptosFactura maxOccurs = unbounded) -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Breakdown of charges/consumptions and prices. </xs:documentation>
+					<xs:documentation xml:lang="es"> Desglose de consumos y precios. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="UtilitiesHistoricoConsumos" type="UtilitiesHistoricoConsumosType" minOccurs="0" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Charges/Consumptions history. </xs:documentation>
+					<xs:documentation xml:lang="es"> Histórico de consumos. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="UtilitiesMensajes" type="UtilitiesMensajesType" minOccurs="0" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Statutory messages. </xs:documentation>
+					<xs:documentation xml:lang="es"> Mensajes reglamentarios. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="UtilitiesAtrAsociado" type="UtilitiesAtrAsociadoType" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Group invoice items. </xs:documentation>
+					<xs:documentation xml:lang="es"> Conceptos de factura agrupada. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="UtilitiesCurva" type="UtilitiesCurvaType" minOccurs="0" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Daily Curve. </xs:documentation>
+					<xs:documentation xml:lang="es"> Curva Diaria. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>	
+	<xs:complexType name="DatosDelSuministroType">
+		<xs:sequence>
+			<xs:element name="CUPS" type="TextMax20Type" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Universal Supply Point Code. </xs:documentation>
+					<xs:documentation xml:lang="es"> Código Universal de Punto de Suministro. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DireccionSuministro" type="DireccionSuministroType" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Supply address. </xs:documentation>
+					<xs:documentation xml:lang="es"> Dirección de suministro. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Contrato" type="ContratoType" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Contract. </xs:documentation>
+					<xs:documentation xml:lang="es"> Contrato. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PotenciasContratadas" type="PotenciasContratadasType" minOccurs="0" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> TRADUCIR:Potencias contratadas. </xs:documentation>
+					<xs:documentation xml:lang="es"> Potencias contratadas. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DatosDistribuidora" type="DistribuidoraType" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Distributor data. </xs:documentation>
+					<xs:documentation xml:lang="es"> Datos Distribuidora. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ReferenciasLegal" type="ReferenciasLegalType" minOccurs="0" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Legal reference. </xs:documentation>
+					<xs:documentation xml:lang="es"> Referencia legal. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Tarifa" type="TarifaType" minOccurs="0" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Tariff. </xs:documentation>
+					<xs:documentation xml:lang="es"> Tarifa. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Agrupacion" type="AgrupacionType" minOccurs="0" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> TRADUCIR: Agrupación. </xs:documentation>
+					<xs:documentation xml:lang="es"> Agrupación. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Referencia" type="TextMax80Type" minOccurs="0" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Reference. </xs:documentation>
+					<xs:documentation xml:lang="es"> Referencia. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DireccionSuministroType">
+		<xs:sequence>
+			<xs:element name="Direccion" type="TextMax80Type" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Supply address. </xs:documentation>
+					<xs:documentation xml:lang="es"> Dirección de suministro. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CodigoPostal" type="TextMax5Type" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Supply postal code. </xs:documentation>
+					<xs:documentation xml:lang="es"> Codigo postal del suministro. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Poblacion" type="TextMax50Type" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Supply city. </xs:documentation>
+					<xs:documentation xml:lang="es"> Ciudad del suministro. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Provincia" type="TextMax50Type" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Supply province. </xs:documentation>
+					<xs:documentation xml:lang="es"> Provincia del suministro. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Pais" type="TextMax3Type" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Supply country. </xs:documentation>
+					<xs:documentation xml:lang="es"> País del suministro. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ContratoType">
+		<xs:sequence>
+			<xs:element name="RefContratoEmpresa" type="TextMax30Type" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Company contract reference. </xs:documentation>
+					<xs:documentation xml:lang="es"> Referencia del contrato de empresa. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FechaFinContrato" type="xs:date" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> TRADUCIR: Fecha fin contrato energía. </xs:documentation>
+					<xs:documentation xml:lang="es"> Fecha fin contrato energía. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PotenciasContratadasType">
+		<xs:sequence>
+			<xs:element name="PotenciaContratada" type="PotenciaContratadaType" minOccurs="1" maxOccurs="unbounded"> <!-- rodrodvi : el minOccurs por defecto es 1, pero lo pongo para q quede más claro -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> TRADUCIR:Potencia contratada. </xs:documentation>
+					<xs:documentation xml:lang="es"> Potencia contratada. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PotenciaContratadaType">
+		<xs:sequence>
+			<!--Original--><!--<xs:element name="Periodo" type="U10_Type" minOccurs="0" maxOccurs="1"> -->
+			<xs:element name="Periodo" type="U10_Type" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren corrección: Si existe el nivel superior "PotenciaContratada", "Periodo" es obligatorio, minOccurs = "1" -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Period. </xs:documentation>
+					<xs:documentation xml:lang="es"> Periodo. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<!--Original--><!--<xs:element name="Valor" type="DoubleFourDecimalType" minOccurs="0" maxOccurs="1"> -->
+			<xs:element name="Valor" type="DoubleFourDecimalType" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren corrección: Si existe el nivel superior "PotenciaContratada", "Valor" es obligatorio, minOccurs = "1" -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Value. </xs:documentation>
+					<xs:documentation xml:lang="es"> Valor. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<!--Original--><!--<xs:element name="UnidadMedida" type="UnidadMedidaType" minOccurs="0" maxOccurs="1"> -->
+			<xs:element name="UnidadMedida" type="UnidadMedidaType" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren corrección: Si existe el nivel superior "PotenciaContratada", "UnidadMedida" es obligatorio, minOccurs = "1" -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Unit of measure. </xs:documentation>
+					<xs:documentation xml:lang="es"> Unidad de medida. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<!--Original--><!--<xs:element name="FechaDesde" type="xs:date" minOccurs="0" maxOccurs="1"> -->
+			<xs:element name="FechaDesde" type="xs:date" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren corrección: Si existe el nivel superior "PotenciaContratada", "FechaDesde" es obligatorio, minOccurs = "1" -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> TRADUCIR: Fecha desde Potencia Contratada. </xs:documentation>
+					<xs:documentation xml:lang="es"> Fecha desde Potencia Contratada. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<!--Original--><!--<xs:element name="FechaHasta" type="xs:date" minOccurs="0" maxOccurs="1"> -->
+			<xs:element name="FechaHasta" type="xs:date" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren corrección: Si existe el nivel superior "PotenciaContratada", "FechaHasta" es obligatorio, minOccurs = "1" -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> TRADUCIR: Fecha hasta Potencia Contratada. </xs:documentation>
+					<xs:documentation xml:lang="es"> Fecha hasta Potencia Contratada. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>	
+	<xs:complexType name="DistribuidoraType">
+		<xs:sequence>
+			<xs:element name="Distribuidora" type="TextMax80Type" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Distributor. </xs:documentation>
+					<xs:documentation xml:lang="es"> Distribuidora. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TelefonoAverias" type="TextMax15Type" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Breakdowns telephone. </xs:documentation>
+					<xs:documentation xml:lang="es">Tenefono de averias. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ReferenciasLegalType">
+		<xs:sequence>
+			<xs:element name="ReferenciaLegal" type="ReferenciaLegalType" maxOccurs="unbounded" minOccurs="1"> <!-- rodrodvi : el minOccurs por defecto es 1, pero lo pongo para q quede más claro -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> TRADUCIR:Legal reference. </xs:documentation>
+					<xs:documentation xml:lang="es"> Referencia Legal. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ReferenciaLegalType">
+		<xs:sequence>
+			<xs:element name="BOEBOCA" type="TextMax50Type" minOccurs="0" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> BOE / BOCA. </xs:documentation>
+					<xs:documentation xml:lang="es"> Boletin Oficial del Estado / Boletín Oficial de Canarias. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FechaBOEBOCA" type="xs:date" minOccurs="0" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> BOE / BOCA date. </xs:documentation>
+					<xs:documentation xml:lang="es"> Fecha del Boletín Oficial del Estado / Islas Canarias. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TarifaType">
+		<xs:sequence>
+			<xs:element name="CodigoTarifaProducto" type="TextMax30Type" minOccurs="0" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Tariff code. </xs:documentation>
+					<xs:documentation xml:lang="es"> Código de tarifa. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AltaMedidaEnBaja" type="AltaMedidaEnBajaTablaType" minOccurs="0" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> TRADUCIR: Alta Medida en Baja Tabla. </xs:documentation>
+					<xs:documentation xml:lang="es"> Alta Medida en Baja Tabla. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AltaMedidaEnBajaTablaType">
+		<xs:sequence>
+			<xs:element name="MarcaMedidaConPerdidas" type="SiNoType" minOccurs="0" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> TRADUCIR: Marca Medida con Perdidas. </xs:documentation>
+					<xs:documentation xml:lang="es"> Marca Medida con Perdidas. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="KVAsTrafo" type="DoubleFourDecimalType" minOccurs="0" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> TRADUCIR: KVAs Trafo. </xs:documentation>
+					<xs:documentation xml:lang="es"> KVAs Trafo. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PorcentajePerdidasPactadas" type="DoubleTwoDecimalType" minOccurs="0" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> TRADUCIR: Porcentaje Perdidas Pactadas. </xs:documentation>
+					<xs:documentation xml:lang="es"> Porcentaje Perdidas Pactadas. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AgrupacionType">
+		<xs:sequence>
+			<xs:element name="CodigoAgrupacion" type="TextMax20Type" minOccurs="0" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> TRADUCIR: Código de la agrupación. </xs:documentation>
+					<xs:documentation xml:lang="es"> Código de la agrupación. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UtilitiesMedidaType">
+		<xs:sequence>
+			<xs:element name="MedidasSobreEquipo" type="MedidasSobreEquipoType" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Measures over the equipment. </xs:documentation>
+					<xs:documentation xml:lang="es"> Medidas sobre el equipo. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MedidasSobreEquipoType">
+		<xs:sequence>
+			<xs:element name="MedidaSobreEquipo" type="MedidaSobreEquipoType" maxOccurs="unbounded" minOccurs="1"> <!-- rodrodvi : el minOccurs por defecto es 1, pero lo pongo para q quede más claro -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Measure over the equipment. </xs:documentation>
+					<xs:documentation xml:lang="es"> Medida sobre el equipo. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MedidaSobreEquipoType">
+		<xs:sequence>
+			<xs:element name="TipoMedida" type="U2_Type" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Measure type. </xs:documentation>
+					<xs:documentation xml:lang="es"> Tipo de medida. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="LineaMedidaContador" type="U8_Type" minOccurs="1" maxOccurs="unbounded"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> TRADUCIR: Linea Medida Contador. </xs:documentation>
+					<xs:documentation xml:lang="es"> Linea Medida Contador. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NumeroSerie" type="TextMax20Type" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Series number. </xs:documentation>
+					<xs:documentation xml:lang="es"> Número serie. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CodigoDH" type="U3_Type" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> DH Code. </xs:documentation>
+					<xs:documentation xml:lang="es"> Codigo DH. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Magnitud" type="U4_Type" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Magnitude. </xs:documentation>
+					<xs:documentation xml:lang="es"> Magnitud. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ConstanteMultiplicadora" type="DoubleTwoDecimalType" minOccurs="0" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Multiplier constant. </xs:documentation>
+					<xs:documentation xml:lang="es"> Constante multiplicadora. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="LecturaDesde" type="DoubleTwoDecimalType" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Reading from (reading index). </xs:documentation>
+					<xs:documentation xml:lang="es"> Lectura desde (índice de lectura). </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FechaHoraDesde" type="xs:dateTime" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Date and time from. </xs:documentation>
+					<xs:documentation xml:lang="es"> Fecha y hora desde. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="LecturaHasta" type="DoubleTwoDecimalType" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Reading to (reading index). </xs:documentation>
+					<xs:documentation xml:lang="es"> Lectura hasta (índice de lectura). </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FechaHoraHasta" type="xs:dateTime" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Date and time to. </xs:documentation>
+					<xs:documentation xml:lang="es"> Fecha y hora hasta. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TipoDeLecturaDesde" type="U5_Type" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Current reading type. </xs:documentation>
+					<xs:documentation xml:lang="es"> Tipo de lectura actual. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TipoDeLecturaHasta" type="U5_Type" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Previous reading type. </xs:documentation>
+					<xs:documentation xml:lang="es"> Tipo de lectura anterior. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ConsumoLeido" type="DoubleTwoDecimalType" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Read consumption. </xs:documentation>
+					<xs:documentation xml:lang="es"> Consumo leido. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="UnidadConsumoEnergiaLeido" type="U9_Type" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> TRADUCIR: Unidades del consumo leído de energía. </xs:documentation>
+					<xs:documentation xml:lang="es"> Unidades del consumo leído de energía. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Ajuste" type="DoubleTwoDecimalType" minOccurs="0" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Adjustment. </xs:documentation>
+					<xs:documentation xml:lang="es"> Ajuste. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ConsumoCalculado" type="DoubleTwoDecimalType" minOccurs="0" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Calculated consumption. </xs:documentation>
+					<xs:documentation xml:lang="es"> Consumo calculado. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="UnidadConsumoCalculado" type="U9_Type" minOccurs="0" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> TRADUCIR: Unidades del consumo calculado. </xs:documentation>
+					<xs:documentation xml:lang="es"> Unidades del consumo calculado. </xs:documentation>
+				</xs:annotation>
+			</xs:element>		
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UtilitiesDesgloseConceptosFacturaType">
+		<xs:sequence>
+			<xs:element name="DesgloseConceptosFactura" type="DesgloseConceptosFacturaType" minOccurs="1" maxOccurs="unbounded">			
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> TRADUCIR: Desgloses de conceptos de factura. </xs:documentation>
+					<xs:documentation xml:lang="es"> Desgloses de conceptos de factura. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Impuestos" type="ImpuestosType" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> TRADUCIR: Impuestos. </xs:documentation>
+					<xs:documentation xml:lang="es"> Impuestos. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DesgloseConceptosFacturaType">	
+		<xs:sequence>
+			<xs:element name="ConceptoFacturado" type="TextMax50Type" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> TRADUCIR: Concepto Facturado. </xs:documentation>
+					<xs:documentation xml:lang="es"> Concepto Facturado. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TipoConceptoFacturado" type="U7_Type" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> TRADUCIR: Tipo Concepto Facturado. </xs:documentation>
+					<xs:documentation xml:lang="es"> Tipo Concepto Facturado. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DetallePeriodo" type="DetallePeriodoType" minOccurs="1" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> TRADUCIR: Desglose de concepto de factura. </xs:documentation>
+					<xs:documentation xml:lang="es"> Desglose de concepto de factura. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DetallePeriodoType">
+		<xs:sequence>
+			<xs:element name="PeriodoDH" type="U10_Type" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> TRADUCIR: Periodo DH. </xs:documentation>
+					<xs:documentation xml:lang="es"> Periodo DH. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Cantidad" type="DoubleFourDecimalType" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> TRADUCIR: Cantidad. </xs:documentation>
+					<xs:documentation xml:lang="es"> Cantidad. </xs:documentation>
+				</xs:annotation>
+			</xs:element>				
+			<xs:element name="UnidadesCantidad" type="TextMax10Type" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> TRADUCIR: Unidad de cantidad. </xs:documentation>
+					<xs:documentation xml:lang="es"> Unidad de cantidad. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FechaDesde" type="xs:date" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> TRADUCIR:Start date. </xs:documentation>
+					<xs:documentation xml:lang="es"> Fecha de inicio. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FechaHasta" type="xs:date" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> TRADUCIR:End period date. </xs:documentation>
+					<xs:documentation xml:lang="es"> Fecha del fin. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Periodo" type="DoubleEightDecimalType" minOccurs="0" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Period. </xs:documentation>
+					<xs:documentation xml:lang="es"> Periodo. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="UnidadPeriodo" type="U13_Type" minOccurs="0" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> TRADUCIR:Period unit. </xs:documentation>
+					<xs:documentation xml:lang="es"> Unidad del periodo. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PrecioUnitario" type="DoubleEightDecimalType" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> TRADUCIR: Precio unitario. </xs:documentation>
+					<xs:documentation xml:lang="es"> Precio unitario. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="UnidadesPrecioUnitario" type="U14_Type" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> TRADUCIR: Unidades del precio unitario. </xs:documentation>
+					<xs:documentation xml:lang="es"> Unidades del precio unitario. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="LineasMedidaContador" type="LineasMedidaContadorType" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> TRADUCIR:Lineas Medida Contador. </xs:documentation>
+					<xs:documentation xml:lang="es"> Lineas Medida Contador. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Importe" type="DoubleTwoDecimalType" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> TRADUCIR:Amount. </xs:documentation>
+					<xs:documentation xml:lang="es"> Importe. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="LineasMedidaContadorType">	
+		<xs:sequence>
+			<!-- ORIGINAL: --> <!-- <xs:element name="LineaMedidaContador" type="U8_Type" minOccurs="1"> --> <!-- jcyl_eren corrección: maxOccurs por defecto es 1, pero en este caso pueden ser varios, se pone a unbounded -->
+			<xs:element name="LineaMedidaContador" type="U8_Type" minOccurs="1" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> TRADUCIR:Linea Medida Contador. </xs:documentation>
+					<xs:documentation xml:lang="es"> Linea Medida Contador. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ImpuestosType">	
+		<xs:sequence>
+			<xs:element name="Impuesto" type="TotalAntesdeImpuestosType" maxOccurs="unbounded" minOccurs="1"> <!-- jcyl_eren : minOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> TRADUCIR: Impuesto. </xs:documentation>
+					<xs:documentation xml:lang="es"> Impuesto. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TotalAntesdeImpuestosType">
+		<xs:sequence>
+			<xs:element name="Base" type="DoubleTwoDecimalType" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> TRADUCIR: Base. </xs:documentation>
+					<xs:documentation xml:lang="es"> Base. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TipoImpuesto" type="U11_Type" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> TRADUCIR: Tipo Impuesto. </xs:documentation>
+					<xs:documentation xml:lang="es"> Tipo Impuesto. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TipoImpositivo" type="DoubleTenDecimalType" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> TRADUCIR: Tipo Impositivo. </xs:documentation>
+					<xs:documentation xml:lang="es"> Tipo Impositivo. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TipoOperacion" type="U12_Type" minOccurs="0" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> TRADUCIR: Tipo Operacion. </xs:documentation>
+					<xs:documentation xml:lang="es"> Tipo Operación. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Importe" type="DoubleTwoDecimalType" minOccurs="0" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> TRADUCIR: Importe. </xs:documentation>
+					<xs:documentation xml:lang="es"> Importe. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UtilitiesHistoricoConsumosType">
+		<xs:sequence>
+			<xs:element name="HistoricoConsumo" type="HistoricoConsumoType" maxOccurs="unbounded" minOccurs="1"> <!-- jcyl_eren : minOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Consumptions history. </xs:documentation>
+					<xs:documentation xml:lang="es"> Histórico de consumos. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="HistoricoConsumoType">
+		<xs:sequence>
+			<!-- Ojo Modificacion-->
+			<xs:element name="Periodo" type="U10_Type" minOccurs="0" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Period. </xs:documentation>
+					<xs:documentation xml:lang="es"> Periodo. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<!-- Ojo Modificacion-->
+			<xs:element name="Descripcion" type="TextMax20Type" minOccurs="0" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Description. </xs:documentation>
+					<xs:documentation xml:lang="es"> Descripción. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Valor" type="DoubleTwoDecimalType" minOccurs="0" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Value. </xs:documentation>
+					<xs:documentation xml:lang="es"> Valor. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="UnidadMedida" type="UnidadMedidaHType" minOccurs="0" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Unit of measure. </xs:documentation>
+					<xs:documentation xml:lang="es"> Unidad de medida. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FechaDesdePeriodo" type="xs:date" minOccurs="0" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Start period date. </xs:documentation>
+					<xs:documentation xml:lang="es"> Fecha de inicio del periodo. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FechaHastaPeriodo" type="xs:date" minOccurs="0" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> End period date. </xs:documentation>
+					<xs:documentation xml:lang="es"> Fecha del fin del periodo. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UtilitiesMensajesType">
+		<xs:sequence>
+			<xs:element name="ListaMensajes" type="ListaMensajesType" minOccurs="0" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Messages list. </xs:documentation>
+					<xs:documentation xml:lang="es"> Lista de mensajes. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ListaMensajesType">
+		<xs:sequence>
+			<xs:element name="Mensaje" type="MensajeType" maxOccurs="unbounded" minOccurs="1"> <!-- jcyl_eren : minOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Message. </xs:documentation>
+					<xs:documentation xml:lang="es"> Mensaje. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MensajeType">
+		<xs:sequence>
+			<xs:element name="MensajeID" type="TextMax20Type" minOccurs="0" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Identifier. </xs:documentation>
+					<xs:documentation xml:lang="es"> Identificador. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Contenido" type="TextMax2500Type" minOccurs="0" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Content. </xs:documentation>
+					<xs:documentation xml:lang="es"> Contenido. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UtilitiesAtrAsociadoType">
+		<xs:sequence>
+			<xs:element name="TarifaDeAccesoATR" type="U6_Type" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> ATR access tariff. </xs:documentation>
+					<xs:documentation xml:lang="es"> Tarifa de acceso ATR. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ContratoDeAcceso" type="TextMax30Type" minOccurs="1" maxOccurs="1"> <!-- jcyl_eren : maxOccurs por defecto es 1, se pone por claridad -->
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Access contract. </xs:documentation>
+					<xs:documentation xml:lang="es"> Contrato de acceso. </xs:documentation>
+				</xs:annotation>
+			</xs:element>			
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UtilitiesCurvaType">
+		<xs:sequence>
+			<!-- ORIGINAL: --> <!-- <xs:element name="CurvaDiaria" type="CurvaDiariaType" minOccurs="0"> --> <!-- jcyl_eren corrección: si existe la curva, puede haber varios días, maxOccurs unbounded -->
+			<xs:element name="CurvaDiaria" type="CurvaDiariaType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Daily Curve. </xs:documentation>
+					<xs:documentation xml:lang="es"> Curva Diaria. </xs:documentation>
+				</xs:annotation>
+			</xs:element>			
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CurvaDiariaType">
+		<xs:sequence>
+			<!-- ORIGINAL: --> <!-- <xs:element name="FechaCurva" type="date" minOccurs="0"> --> <!-- jcyl_eren corrección: si existe la curva diaria, el dato "FechaCurva" es obligatorio, minOccurs = "1" -->
+			<xs:element name="FechaCurva" type="xs:date" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Date Curve. </xs:documentation>
+					<xs:documentation xml:lang="es"> Fecha Curva. </xs:documentation>
+				</xs:annotation>
+			</xs:element>	
+			<!-- ORIGINAL --> <!-- <xs:element name="DatosCurva" type="DatosCurvaType" minOccurs="0" maxOccurs="1"> --> <!-- jcyl_eren corrección: si existe la curva diaria, el dato "DatosCurva" es obligatorio, minOccurs = "1" -->
+			<xs:element name="DatosCurva" type="DatosCurvaType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Data Curve. </xs:documentation>
+					<xs:documentation xml:lang="es"> Datos Curva. </xs:documentation>
+				</xs:annotation>
+			</xs:element>				
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DatosCurvaType">
+		<xs:sequence>
+			<!-- ORIGINAL: --> <!-- <xs:element name="TipologiaCurva" type="U15_Type" minOccurs="0" maxOccurs="1"> --> <!-- jcyl_eren corrección: si existe la curva diaria, el dato "DatosCurva" es obligatorio, minOccurs = "1" -->
+			<xs:element name="TipologiaCurva" type="U15_Type" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Date Curve. </xs:documentation>
+					<xs:documentation xml:lang="es"> Fecha Curva. </xs:documentation>
+				</xs:annotation>
+			</xs:element>	
+			<!-- ORIGINAL: --> <!-- <xs:element name="TipoValor" type="U16_Type" minOccurs="0" maxOccurs="1"> --> <!-- jcyl_eren corrección: si existe la curva diaria, el dato "TipoValor" es obligatorio, minOccurs = "1" -->
+			<xs:element name="TipoValor" type="U16_Type" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Data Curve. </xs:documentation>
+					<xs:documentation xml:lang="es"> Datos Curva. </xs:documentation>
+				</xs:annotation>
+			</xs:element>	
+			<!-- ORIGINAL: --> <!-- <xs:element name="Periodicidad" type="U17_Type" minOccurs="0" maxOccurs="1"> --> <!-- jcyl_eren corrección: si existe la curva diaria, el dato "Periodicidad" es obligatorio, minOccurs = "1" -->
+			<xs:element name="Periodicidad" type="U17_Type" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Date Curve. </xs:documentation>
+					<xs:documentation xml:lang="es"> Fecha Curva. </xs:documentation>
+				</xs:annotation>
+			</xs:element>	
+			<!-- ORIGINAL: --> <!-- <xs:element name="ValorCurva" type="TextMax2000Type" minOccurs="0" maxOccurs="1"> --> <!-- jcyl_eren corrección: si existe la curva diaria, el dato "ValorCurva" es obligatorio, minOccurs = "1" -->
+			<xs:element name="ValorCurva" type="TextMax2000Type" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation xml:lang="en"> Data Curve. </xs:documentation>
+					<xs:documentation xml:lang="es"> Datos Curva. </xs:documentation>
+				</xs:annotation>
+			</xs:element>				
+		</xs:sequence>
+	</xs:complexType>
+	
+	
+	<!-- Simple Types -->
+	<!-- Text Types -->
+	<xs:simpleType name="TextMax2Type">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TextMax3Type">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TextMax5Type">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TextMax10Type">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TextMax15Type">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TextMax20Type">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TextMax22Type">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="22"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TextMax24Type">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="24"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TextMax30Type">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TextMax50Type">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TextMax80Type">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="80"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TextMax2000Type">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="2000"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TextMax2500Type">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="2500"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- Number Types -->
+	<xs:simpleType name="DoubleTwoDecimalType">
+		<xs:restriction base="xs:double">
+			<xs:pattern value="[0-9][0-9]*\.[0-9]{2}|-[0-9][0-9]*\.[0-9]{2}">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Always to two decimal places.</xs:documentation>
+					<xs:documentation xml:lang="es">Siempre con dos decimales.</xs:documentation>
+				</xs:annotation>
+			</xs:pattern>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DoubleFourDecimalType">
+		<xs:restriction base="xs:double">
+			<xs:pattern value="[0-9][0-9]*\.[0-9]{4}">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Always to four decimal places.</xs:documentation>
+					<xs:documentation xml:lang="es">Siempre con cuatro decimales.</xs:documentation>
+				</xs:annotation>
+			</xs:pattern>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DoubleEightDecimalType">
+		<xs:restriction base="xs:double">
+			<xs:pattern value="[0-9][0-9]*\.[0-9]{8}">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Always to eight decimal places.</xs:documentation>
+					<xs:documentation xml:lang="es">Siempre con ocho decimales.</xs:documentation>
+				</xs:annotation>
+			</xs:pattern>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DoubleTenDecimalType">
+		<xs:restriction base="xs:double">
+			<xs:pattern value="[0-9][0-9]*\.[0-9]{10}">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Always to ten decimal places.</xs:documentation>
+					<xs:documentation xml:lang="es">Siempre con diez decimales.</xs:documentation>
+				</xs:annotation>
+			</xs:pattern>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- Enumerations -->
+	<xs:simpleType name="SiNoType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Si"/>
+			<xs:enumeration value="No"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TipoExtensionCompletaType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Completa"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TipoExtensionReducidaType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Reducida"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UnidadMedidaType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="kW"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!--Ojo Modificado -->
+	<xs:simpleType name="UnidadMedidaHType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="KwH"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UnidadPeriodoType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="días"/>
+			<xs:enumeration value="meses"/>
+			<xs:enumeration value="años"/>
+			<xs:enumeration value="horas"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UnidadesPrecioUnitarioType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="€"/>
+			<xs:enumeration value="%"/>
+			<xs:enumeration value="€/año"/>
+			<xs:enumeration value="€/mes"/>
+			<xs:enumeration value="€/dia"/>
+			<xs:enumeration value="€/kVAr"/>
+			<xs:enumeration value="€/kVArh"/>
+			<xs:enumeration value="€/kW"/>
+			<xs:enumeration value="€/kWd"/>
+			<xs:enumeration value="€/kWh"/>
+			<xs:enumeration value="€/kWm"/>
+			<xs:enumeration value="cent€/año"/>
+			<xs:enumeration value="cent€/mes"/>
+			<xs:enumeration value="cent€/dia"/>
+			<xs:enumeration value="cent€/kVAr"/>
+			<xs:enumeration value="cent€/kVArh"/>
+			<xs:enumeration value="cent€/kW"/>
+			<xs:enumeration value="cent€/kWd"/>
+			<xs:enumeration value="cent€/kWh"/>
+			<xs:enumeration value="cent€/kWm"/>
+			<xs:enumeration value="kVA"/>
+			<xs:enumeration value="kVAr"/>
+			<xs:enumeration value="kVArh"/>
+			<xs:enumeration value="kW"/>
+			<xs:enumeration value="kWh"/>
+			<xs:enumeration value="otros"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	
+	<xs:simpleType name="U2_Type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="01">
+				<xs:annotation>
+					<xs:documentation>TGT.Contador telegestionado</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="02">
+				<xs:annotation>
+					<xs:documentation>Contador no telegestionado no telemedido</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="03">
+				<xs:annotation>
+					<xs:documentation>Contador Telemedido</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="U3_Type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="10">
+				<xs:annotation>
+					<xs:documentation>Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="20">
+				<xs:annotation>
+					<xs:documentation>Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="21">
+				<xs:annotation>
+					<xs:documentation>Punta</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="22">
+				<xs:annotation>
+					<xs:documentation>Llano+Valle</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="30">
+				<xs:annotation>
+					<xs:documentation>Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="31">
+				<xs:annotation>
+					<xs:documentation>Punta</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="32">
+				<xs:annotation>
+					<xs:documentation>Llano</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="33">
+				<xs:annotation>
+					<xs:documentation>Valle</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="40">
+				<xs:annotation>
+					<xs:documentation>Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="41">
+				<xs:annotation>
+					<xs:documentation>Punta</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="42">
+				<xs:annotation>
+					<xs:documentation>Llano</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="43">
+				<xs:annotation>
+					<xs:documentation>Valle</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="60">
+				<xs:annotation>
+					<xs:documentation>Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="61">
+				<xs:annotation>
+					<xs:documentation>Periodo 1</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="62">
+				<xs:annotation>
+					<xs:documentation>Periodo 2</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="63">
+				<xs:annotation>
+					<xs:documentation>Periodo 3</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="64">
+				<xs:annotation>
+					<xs:documentation>Periodo 4</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="65">
+				<xs:annotation>
+					<xs:documentation>Periodo 5</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="66">
+				<xs:annotation>
+					<xs:documentation>Periodo 6</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="80">
+				<xs:annotation>
+					<xs:documentation>Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="81">
+				<xs:annotation>
+					<xs:documentation>Punta+ Llano</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="82">
+				<xs:annotation>
+					<xs:documentation>Valle</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="83">
+				<xs:annotation>
+					<xs:documentation>Supervalle</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="90">
+				<xs:annotation>
+					<xs:documentation>Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="91">
+				<xs:annotation>
+					<xs:documentation>Punta</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="92">
+				<xs:annotation>
+					<xs:documentation>Llano</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="93">
+				<xs:annotation>
+					<xs:documentation>Valle</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="A0">
+				<xs:annotation>
+					<xs:documentation>P1</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="A2">
+				<xs:annotation>
+					<xs:documentation>P2</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="A3">
+				<xs:annotation>
+					<xs:documentation>P3</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="A4">
+				<xs:annotation>
+					<xs:documentation>P4</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="A5">
+				<xs:annotation>
+					<xs:documentation>P5</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="A6">
+				<xs:annotation>
+					<xs:documentation>P6</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="B0">
+				<xs:annotation>
+					<xs:documentation>Periodo 1</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="B1">
+				<xs:annotation>
+					<xs:documentation>Periodo 2</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="B2">
+				<xs:annotation>
+					<xs:documentation>Periodo 3</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="B3">
+				<xs:annotation>
+					<xs:documentation>Periodo 4</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="B4">
+				<xs:annotation>
+					<xs:documentation>Periodo 5</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="B5">
+				<xs:annotation>
+					<xs:documentation>Periodo 6</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="B6">
+				<xs:annotation>
+					<xs:documentation>Periodo 7</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="B7">
+				<xs:annotation>
+					<xs:documentation>Periodo 8</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="B8">
+				<xs:annotation>
+					<xs:documentation>Periodo 9</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="B9">
+				<xs:annotation>
+					<xs:documentation>Periodo 10</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="U4_Type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="AE">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Entrante</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AS">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Saliente</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EP">
+				<xs:annotation>
+					<xs:documentation>Excesos de potencia</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PM">
+				<xs:annotation>
+					<xs:documentation>Potencia máxima</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R1">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 1</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R2">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 2</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R3">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 3</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R4">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 4</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="U5_Type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Real"/>
+			<xs:enumeration value="Estimada"/>
+			<xs:enumeration value="Sin lectura"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="U6_Type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="001">
+				<xs:annotation>
+					<xs:documentation>2.0 A</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="002">
+				<xs:annotation>
+					<xs:documentation>2.0 N. A</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="003">
+				<xs:annotation>
+					<xs:documentation>3.0 A</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="004">
+				<xs:annotation>
+					<xs:documentation>2.0 DHA</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="005">
+				<xs:annotation>
+					<xs:documentation>2.1 A</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="006">
+				<xs:annotation>
+					<xs:documentation>2.1 DHA</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="007">
+				<xs:annotation>
+					<xs:documentation>2.0 DHS</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="008">
+				<xs:annotation>
+					<xs:documentation>2.1 DHS</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="011">
+				<xs:annotation>
+					<xs:documentation>3.1 A</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="012">
+				<xs:annotation>
+					<xs:documentation>6.1 A</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="013">
+				<xs:annotation>
+					<xs:documentation>6.2</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="014">
+				<xs:annotation>
+					<xs:documentation>6.3</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="015">
+				<xs:annotation>
+					<xs:documentation>6.4</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="016">
+				<xs:annotation>
+					<xs:documentation>6.5</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="017">
+				<xs:annotation>
+					<xs:documentation>6.1 B</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="018">
+				<xs:annotation>
+					<xs:documentation>2.0TD</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="019">
+				<xs:annotation>
+					<xs:documentation>3.0TD</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="020">
+				<xs:annotation>
+					<xs:documentation>6.1TD</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="021">
+				<xs:annotation>
+					<xs:documentation>6.2TD</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="022">
+				<xs:annotation>
+					<xs:documentation>6.3TD</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="023">
+				<xs:annotation>
+					<xs:documentation>6.4TD</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="024">
+				<xs:annotation>
+					<xs:documentation>3.0TDVE</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="025">
+				<xs:annotation>
+					<xs:documentation>6.1TDVE</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="U7_Type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="PA">
+				<xs:annotation>
+					<xs:documentation>Peaje de acceso del término de energía</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PP">
+				<xs:annotation>
+					<xs:documentation>Peaje de acceso del término de potencia</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TP">
+				<xs:annotation>
+					<xs:documentation>Término de potencia sin peajes</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TE">
+				<xs:annotation>
+					<xs:documentation>Término de energía sin peajes</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TEP">
+				<xs:annotation>
+					<xs:documentation>Término de la energía con peajes</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TPP">
+				<xs:annotation>
+					<xs:documentation>Término de potencia con peaje</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RC">
+				<xs:annotation>
+					<xs:documentation>Término reactiva </xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EXC">
+				<xs:annotation>
+					<xs:documentation>Excesos potencia</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ALQ">
+				<xs:annotation>
+					<xs:documentation>Alquiler de equipos de medida</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MC">
+				<xs:annotation>
+					<xs:documentation>Margen comercialización</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EP">
+				<xs:annotation>
+					<xs:documentation>Exceso de Potencia (en kilovatios, kW), sólo aplicable a peajes 6.x.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DX">
+				<xs:annotation>
+					<xs:documentation>Derechos de extensión</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DN">
+				<xs:annotation>
+					<xs:documentation>Derechos de enganche</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DA">
+				<xs:annotation>
+					<xs:documentation>Otros derechos de acceso</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RCT">
+				<xs:annotation>
+					<xs:documentation>Regularización Consumo TUR</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DT">
+				<xs:annotation>
+					<xs:documentation>DescuentoSobreTarifaTUR</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DPT">
+				<xs:annotation>
+					<xs:documentation>DescuentoPorcSobreTarifaTUR</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CC">
+				<xs:annotation>
+					<xs:documentation>Otros conceptos </xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="U8_Type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="AE10">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Entrante Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AE20">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Entrante Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AE21">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Entrante Punta</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AE22">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Entrante Llano+Valle</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AE30">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Entrante Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AE31">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Entrante Punta</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AE32">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Entrante Llano</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AE33">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Entrante Valle</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AE40">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Entrante Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AE41">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Entrante Punta</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AE42">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Entrante Llano</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AE43">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Entrante Valle</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AE60">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Entrante Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AE61">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Entrante Periodo 1</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AE62">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Entrante Periodo 2</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AE63">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Entrante Periodo 3</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AE64">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Entrante Periodo 4</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AE65">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Entrante Periodo 5</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AE66">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Entrante Periodo 6</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AE80">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Entrante Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AE81">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Entrante Punta+ Llano</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AE82">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Entrante Valle</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AE83">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Entrante Supervalle</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AE90">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Entrante Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AE91">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Entrante Punta</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AE92">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Entrante Llano</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AE93">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Entrante Valle</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AEA0">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Entrante Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AEA1">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Entrante P1</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AEA2">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Entrante P2</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AEA3">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Entrante P3</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AEA4">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Entrante P4</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AEA5">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Entrante P5</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AEA6">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Entrante P6</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AEB1">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Entrante Periodo 1</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AEB2">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Entrante Periodo 2</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AEB3">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Entrante Periodo 3</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AEB4">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Entrante Periodo 4</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AEB5">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Entrante Periodo 5</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AEB6">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Entrante Periodo 6</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AEB7">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Entrante Periodo 7</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AEB8">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Entrante Periodo 8</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AEB9">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Entrante Periodo 9</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AEB10">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Entrante Periodo 10</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AS10">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Saliente Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AS20">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Saliente Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AS21">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Saliente Punta</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AS22">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Saliente Llano+Valle</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AS30">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Saliente Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AS31">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Saliente Punta</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AS32">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Saliente Llano</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AS33">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Saliente Valle</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AS40">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Saliente Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AS41">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Saliente Punta</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AS42">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Saliente Llano</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AS43">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Saliente Valle</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AS60">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Saliente Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AS61">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Saliente Periodo 1</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AS62">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Saliente Periodo 2</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AS63">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Saliente Periodo 3</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AS64">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Saliente Periodo 4</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AS65">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Saliente Periodo 5</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AS66">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Saliente Periodo 6</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AS80">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Saliente Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AS81">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Saliente Punta+ Llano</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AS82">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Saliente Valle</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AS83">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Saliente Supervalle</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AS90">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Saliente Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AS91">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Saliente Punta</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AS92">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Saliente Llano</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AS93">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Saliente Valle</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ASA0">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Saliente Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ASA1">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Saliente P1</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ASA2">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Saliente P2</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ASA3">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Saliente P3</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ASA4">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Saliente P4</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ASA5">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Saliente P5</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ASA6">
+				<xs:annotation>
+					<xs:documentation>Energía Activa Saliente P6</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>	
+			<xs:enumeration value="EP10">
+				<xs:annotation>
+					<xs:documentation>Excesos de potencia Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EP20">
+				<xs:annotation>
+					<xs:documentation>Excesos de potencia Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EP21">
+				<xs:annotation>
+					<xs:documentation>Excesos de potencia Punta</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EP22">
+				<xs:annotation>
+					<xs:documentation>Excesos de potencia Llano+Valle</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EP30">
+				<xs:annotation>
+					<xs:documentation>Excesos de potencia Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EP31">
+				<xs:annotation>
+					<xs:documentation>Excesos de potencia Punta</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EP32">
+				<xs:annotation>
+					<xs:documentation>Excesos de potencia Llano</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EP33">
+				<xs:annotation>
+					<xs:documentation>Excesos de potencia Valle</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EP40">
+				<xs:annotation>
+					<xs:documentation>Excesos de potencia Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EP41">
+				<xs:annotation>
+					<xs:documentation>Excesos de potencia Punta</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EP42">
+				<xs:annotation>
+					<xs:documentation>Excesos de potencia Llano</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EP43">
+				<xs:annotation>
+					<xs:documentation>Excesos de potencia Valle</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EP60">
+				<xs:annotation>
+					<xs:documentation>Excesos de potencia Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EP61">
+				<xs:annotation>
+					<xs:documentation>Excesos de potencia Periodo 1</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EP62">
+				<xs:annotation>
+					<xs:documentation>Excesos de potencia Periodo 2</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EP63">
+				<xs:annotation>
+					<xs:documentation>Excesos de potencia Periodo 3</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EP64">
+				<xs:annotation>
+					<xs:documentation>Excesos de potencia Periodo 4</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EP65">
+				<xs:annotation>
+					<xs:documentation>Excesos de potencia Periodo 5</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EP66">
+				<xs:annotation>
+					<xs:documentation>Excesos de potencia Periodo 6</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EP80">
+				<xs:annotation>
+					<xs:documentation>Excesos de potencia Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EP81">
+				<xs:annotation>
+					<xs:documentation>Excesos de potencia Punta+ Llano</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EP82">
+				<xs:annotation>
+					<xs:documentation>Excesos de potencia Valle</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EP83">
+				<xs:annotation>
+					<xs:documentation>Excesos de potencia Supervalle</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EP90">
+				<xs:annotation>
+					<xs:documentation>Excesos de potencia Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EP91">
+				<xs:annotation>
+					<xs:documentation>Excesos de potencia Punta</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EP92">
+				<xs:annotation>
+					<xs:documentation>Excesos de potencia Llano</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EP93">
+				<xs:annotation>
+					<xs:documentation>Excesos de potencia Valle</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EPA0">
+				<xs:annotation>
+					<xs:documentation>Excesos de potencia Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EPA1">
+				<xs:annotation>
+					<xs:documentation>Excesos de potencia P1</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EPA2">
+				<xs:annotation>
+					<xs:documentation>Excesos de potencia P2</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EPA3">
+				<xs:annotation>
+					<xs:documentation>Excesos de potencia P3</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EPA4">
+				<xs:annotation>
+					<xs:documentation>Excesos de potencia P4</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EPA5">
+				<xs:annotation>
+					<xs:documentation>Excesos de potencia P5</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EPA6">
+				<xs:annotation>
+					<xs:documentation>Excesos de potencia P6</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PM10">
+				<xs:annotation>
+					<xs:documentation>Potencia máxima Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PM20">
+				<xs:annotation>
+					<xs:documentation>Potencia máxima Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PM21">
+				<xs:annotation>
+					<xs:documentation>Potencia máxima Punta</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PM22">
+				<xs:annotation>
+					<xs:documentation>Potencia máxima Llano+Valle</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PM30">
+				<xs:annotation>
+					<xs:documentation>Potencia máxima Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PM31">
+				<xs:annotation>
+					<xs:documentation>Potencia máxima Punta</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PM32">
+				<xs:annotation>
+					<xs:documentation>Potencia máxima Llano</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PM33">
+				<xs:annotation>
+					<xs:documentation>Potencia máxima Valle</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PM40">
+				<xs:annotation>
+					<xs:documentation>Potencia máxima Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PM41">
+				<xs:annotation>
+					<xs:documentation>Potencia máxima Punta</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PM42">
+				<xs:annotation>
+					<xs:documentation>Potencia máxima Llano</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PM43">
+				<xs:annotation>
+					<xs:documentation>Potencia máxima Valle</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PM60">
+				<xs:annotation>
+					<xs:documentation>Potencia máxima Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PM61">
+				<xs:annotation>
+					<xs:documentation>Potencia máxima Periodo 1</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PM62">
+				<xs:annotation>
+					<xs:documentation>Potencia máxima Periodo 2</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PM63">
+				<xs:annotation>
+					<xs:documentation>Potencia máxima Periodo 3</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PM64">
+				<xs:annotation>
+					<xs:documentation>Potencia máxima Periodo 4</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PM65">
+				<xs:annotation>
+					<xs:documentation>Potencia máxima Periodo 5</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PM66">
+				<xs:annotation>
+					<xs:documentation>Potencia máxima Periodo 6</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PM80">
+				<xs:annotation>
+					<xs:documentation>Potencia máxima Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PM81">
+				<xs:annotation>
+					<xs:documentation>Potencia máxima Punta+ Llano</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PM82">
+				<xs:annotation>
+					<xs:documentation>Potencia máxima Valle</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PM83">
+				<xs:annotation>
+					<xs:documentation>Potencia máxima Supervalle</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PM90">
+				<xs:annotation>
+					<xs:documentation>Potencia máxima Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PM91">
+				<xs:annotation>
+					<xs:documentation>Potencia máxima Punta</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PM92">
+				<xs:annotation>
+					<xs:documentation>Potencia máxima Llano</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PM93">
+				<xs:annotation>
+					<xs:documentation>Potencia máxima Valle</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PMA0">
+				<xs:annotation>
+					<xs:documentation>Potencia máxima Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PMA1">
+				<xs:annotation>
+					<xs:documentation>Potencia máxima P1</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PMA2">
+				<xs:annotation>
+					<xs:documentation>Potencia máxima P2</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PMA3">
+				<xs:annotation>
+					<xs:documentation>Potencia máxima P3</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PMA4">
+				<xs:annotation>
+					<xs:documentation>Potencia máxima P4</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PMA5">
+				<xs:annotation>
+					<xs:documentation>Potencia máxima P5</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PMA6">
+				<xs:annotation>
+					<xs:documentation>Potencia máxima P6</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R110">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 1 Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R120">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 1 Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R121">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 1 Punta</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R122">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 1 Llano+Valle</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R130">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 1 Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R131">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 1 Punta</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R132">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 1 Llano</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R133">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 1 Valle</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R140">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 1 Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R141">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 1 Punta</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R142">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 1 Llano</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R143">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 1 Valle</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R160">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 1 Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R161">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 1 Periodo 1</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R162">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 1 Periodo 2</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R163">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 1 Periodo 3</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R164">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 1 Periodo 4</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R165">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 1 Periodo 5</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R166">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 1 Periodo 6</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R180">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 1 Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R181">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 1 Punta+ Llano</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R182">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 1 Valle</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R183">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 1 Supervalle</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R190">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 1 Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R191">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 1 Punta</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R192">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 1 Llano</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R193">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 1 Valle</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R1A0">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 1 Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R1A1">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 1 P1</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R1A2">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 1 P2</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R1A3">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 1 P3</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R1A4">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 1 P4</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R1A5">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 1 P5</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R1A6">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 1 P6</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>			
+			<xs:enumeration value="R210">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 2 Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R220">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 2 Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R221">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 2 Punta</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R222">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 2 Llano+Valle</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R230">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 2 Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R231">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 2 Punta</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R232">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 2 Llano</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R233">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 2 Valle</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R240">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 2 Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R241">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 2 Punta</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R242">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 2 Llano</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R243">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 2 Valle</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R260">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 2 Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R261">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 2 Periodo 1</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R262">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 2 Periodo 2</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R263">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 2 Periodo 3</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R264">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 2 Periodo 4</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R265">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 2 Periodo 5</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R266">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 2 Periodo 6</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R280">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 2 Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R281">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 2 Punta+ Llano</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R282">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 2 Valle</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R283">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 2 Supervalle</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R290">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 2 Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R291">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 2 Punta</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R292">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 2 Llano</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R293">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 2 Valle</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R2A0">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 2 Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R2A1">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 2 P1</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R2A2">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 2 P2</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R2A3">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 2 P3</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R2A4">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 2 P4</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R2A5">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 2 P5</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R2A6">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 2 P6</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R310">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 3 Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R320">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 3 Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R321">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 3 Punta</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R322">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 3 Llano+Valle</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R330">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 3 Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R331">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 3 Punta</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R332">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 3 Llano</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R333">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 3 Valle</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R340">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 3 Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R341">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 3 Punta</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R342">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 3 Llano</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R343">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 3 Valle</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R360">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 3 Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R361">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 3 Periodo 1</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R362">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 3 Periodo 2</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R363">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 3 Periodo 3</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R364">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 3 Periodo 4</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R365">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 3 Periodo 5</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R366">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 3 Periodo 6</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R380">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 3 Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R381">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 3 Punta+ Llano</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R382">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 3 Valle</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R383">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 3 Supervalle</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R390">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 3 Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R391">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 3 Punta</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R392">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 3 Llano</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R393">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 3 Valle</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R3A0">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 3 Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R3A1">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 3 P1</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R3A2">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 3 P2</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R3A3">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 3 P3</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R3A4">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 3 P4</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R3A5">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 3 P5</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R3A6">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 3 P6</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R410">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 4 Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R420">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 4 Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R421">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 4 Punta</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R422">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 4 Llano+Valle</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R430">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 4 Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R431">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 4 Punta</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R432">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 4 Llano</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R433">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 4 Valle</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R440">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 4 Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R441">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 4 Punta</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R442">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 4 Llano</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R443">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 4 Valle</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R460">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 4 Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R461">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 4 Periodo 1</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R462">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 4 Periodo 2</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R463">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 4 Periodo 3</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R464">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 4 Periodo 4</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R465">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 4 Periodo 5</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R466">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 4 Periodo 6</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R480">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 4 Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R481">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 4 Punta+ Llano</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R482">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 4 Valle</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R483">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 4 Supervalle</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R490">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 4 Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R491">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 4 Punta</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R492">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 4 Llano</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R493">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 4 Valle</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R4A0">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 4 Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R4A1">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 4 P1</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R4A2">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 4 P2</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R4A3">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 4 P3</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R4A4">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 4 P4</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R4A5">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 4 P5</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R4A6">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva en cuadrante 4 P6</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RNUN">
+				<xs:annotation>
+					<xs:documentation>Relación no unívoca/No aplica</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="U9_Type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="kWh">
+				<xs:annotation>
+					<xs:documentation>Activa</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="kVArh">
+				<xs:annotation>
+					<xs:documentation>Reactiva</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="kW">
+				<xs:annotation>
+					<xs:documentation>Maxímetro</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="U10_Type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="P1">
+				<xs:annotation>
+					<xs:documentation>Periodo 1</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="P2">
+				<xs:annotation>
+					<xs:documentation>Periodo 2</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="P3">
+				<xs:annotation>
+					<xs:documentation>Periodo 3</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="P4">
+				<xs:annotation>
+					<xs:documentation>Periodo 4</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="P5">
+				<xs:annotation>
+					<xs:documentation>Periodo 5</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="P6">
+				<xs:annotation>
+					<xs:documentation>Periodo 6</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TO">
+				<xs:annotation>
+					<xs:documentation>Totalizador</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NA">
+				<xs:annotation>
+					<xs:documentation>No aplica</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="U11_Type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="IVA"/>
+			<xs:enumeration value="IGIC"/>
+			<xs:enumeration value="IPSI"/>
+			<xs:enumeration value="IE"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="U12_Type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="SUJ">
+				<xs:annotation>
+					<xs:documentation>Sujeto</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NSJ">
+				<xs:annotation>
+					<xs:documentation>No sujeto</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EXT">
+				<xs:annotation>
+					<xs:documentation>Exento</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ISP">
+				<xs:annotation>
+					<xs:documentation>Inversión Sujeto Pasivo</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="U13_Type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="d">
+				<xs:annotation>
+					<xs:documentation>días</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="m">
+				<xs:annotation>
+					<xs:documentation>meses</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="a">
+				<xs:annotation>
+					<xs:documentation>años</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="h">
+				<xs:annotation>
+					<xs:documentation>horas</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="U14_Type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="UP01">
+				<xs:annotation>
+					<xs:documentation>Eur./día</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UP02">
+				<xs:annotation>
+					<xs:documentation>Eur.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UP03">
+				<xs:annotation>
+					<xs:documentation>Eur./año</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UP04">
+				<xs:annotation>
+					<xs:documentation>Eur./kVAr</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UP05">
+				<xs:annotation>
+					<xs:documentation>Eur./kVArh</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UP06">
+				<xs:annotation>
+					<xs:documentation>Eur./kW</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UP07">
+				<xs:annotation>
+					<xs:documentation>Eur./kWh</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UP08">
+				<xs:annotation>
+					<xs:documentation>%</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UP09">
+				<xs:annotation>
+					<xs:documentation>Eur./kWd</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UP10">
+				<xs:annotation>
+					<xs:documentation>Eur./kWm</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UP11">
+				<xs:annotation>
+					<xs:documentation>Eur./mes</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UP12">
+				<xs:annotation>
+					<xs:documentation>centEur./mes</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UP13">
+				<xs:annotation>
+					<xs:documentation>centEur./año</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UP14">
+				<xs:annotation>
+					<xs:documentation>centEur./día</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UP15">
+				<xs:annotation>
+					<xs:documentation>centEur./kVAr</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UP16">
+				<xs:annotation>
+					<xs:documentation>centEur./kVArh</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UP17">
+				<xs:annotation>
+					<xs:documentation>centEur./kW</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UP18">
+				<xs:annotation>
+					<xs:documentation>centEur./kWd</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UP19">
+				<xs:annotation>
+					<xs:documentation>centEur./kWh</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UP20">
+				<xs:annotation>
+					<xs:documentation>centEur./kWm</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UP21">
+				<xs:annotation>
+					<xs:documentation>kVA</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UP22">
+				<xs:annotation>
+					<xs:documentation>kVAr</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UP23">
+				<xs:annotation>
+					<xs:documentation>kVArh</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UP24">
+				<xs:annotation>
+					<xs:documentation>kW</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UP25">
+				<xs:annotation>
+					<xs:documentation>kWh</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UP26">
+				<xs:annotation>
+					<xs:documentation>Otros</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UP27">
+				<xs:annotation>
+					<xs:documentation>Eur/ud</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="U15_Type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="TCAEE">
+				<xs:annotation>
+					<xs:documentation>Energía activa entrante</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TCAES">
+				<xs:annotation>
+					<xs:documentation>Energía activa saliente</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TCR1">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva 1 cuadrante</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TCR2">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva 2 cuadrante</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TCR3">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva 3 cuadrante</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TCR4">
+				<xs:annotation>
+					<xs:documentation>Energía reactiva 4 cuadrante</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="U16_Type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Consumo">
+				<xs:annotation>
+					<xs:documentation>Consumo</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Precio">
+				<xs:annotation>
+					<xs:documentation>Precio</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="U17_Type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="TPH">
+				<xs:annotation>
+					<xs:documentation>Horaria</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TPCH">
+				<xs:annotation>
+					<xs:documentation>Cuarto horaria</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>
