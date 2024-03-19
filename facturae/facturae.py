@@ -7,7 +7,7 @@ from xml.etree import ElementTree
 from . import extensions
 
 class FacturaeRoot(XmlModel):
-    _sort_order = ('root', 'fileheader', 'parties', 'invoices')
+    _sort_order = ('root', 'fileheader', 'parties', 'invoices', 'extensions')
 
     def __init__(self):
 
