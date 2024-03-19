@@ -122,7 +122,7 @@ class UtilitiesExtensionELE(XmlModel):
 
 class DatosDelSuministro(XmlModel):
 
-    _sort_order = ('datosdelsuministro', 'CUPS', 'DireccionSuministro', 'contrato', 'potenciascontratadas',
+    _sort_order = ('datosdelsuministro', 'cups', 'direccionsuministro', 'contrato', 'potenciascontratadas',
                    'datosdistribuidora', 'referenciaslegal', 'tarifa', 'agrupacion', 'referencia')
 
     def __init__(self):
