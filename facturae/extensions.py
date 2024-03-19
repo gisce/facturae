@@ -86,7 +86,7 @@ class ImpuestosFR(XmlModel):
 
 class Impuesto(XmlModel):
 
-    _sort_order = ('impuesto', 'base', 'tipoimpuesto', 'tipoimpositivo', 'tipooperacion')
+    _sort_order = ('impuesto', 'base', 'tipoimpuesto', 'tipoimpositivo', 'tipooperacion', 'importe')
 
     def __init__(self):
         self.impuesto = XmlField('Impuesto')
