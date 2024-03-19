@@ -331,12 +331,12 @@ class MedidaSobreEquipo(XmlModel):
 
 class UtilitiesDesgloseConceptosFactura(XmlModel):
 
-    _sort_order = ('utilitiesdesgloseconceptosfactura', 'desgloseconceptosfactura', 'Impuestos')
+    _sort_order = ('utilitiesdesgloseconceptosfactura', 'desgloseconceptosfactura', 'impuestos')
 
     def __init__(self):
         self.utilitiesdesgloseconceptosfactura = XmlField('UtilitiesDesgloseConceptosFactura')
         self.desgloseconceptosfactura = []
-        self.Impuestos = Impuestos()
+        self.impuestos = Impuestos()
         super(UtilitiesDesgloseConceptosFactura, self).__init__('UtilitiesDesgloseConceptosFactura', 'utilitiesdesgloseconceptosfactura')
 
 # 2.2
