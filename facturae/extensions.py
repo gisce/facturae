@@ -8,7 +8,7 @@ from xml.etree import ElementTree
 
 class Extensions(XmlModel):
 
-    _sort_order = ('extensions', 'utility')
+    _sort_order = ('extensions', 'utilities')
 
     def __init__(self):
         self.extensions = XmlField('Extensions')
@@ -20,7 +20,7 @@ class Extensions(XmlModel):
 
 class UtilitiesExtensionsELE(XmlModel):
 
-    _sort_order = ('utilitiesextensionsele', 'version', 'sellerparty', 'buyerparty')
+    _sort_order = ('utilitiesextensionsele', 'version', 'utilitiesfacturaresumen', 'utilitiesextensionele')
 
     def __init__(self):
         self.utilitiesextensionsele = XmlField('UtilitiesExtensionsELE')
@@ -102,11 +102,12 @@ class Impuesto(XmlModel):
 
 class UtilitiesExtensionELE(XmlModel):
 
-    _sort_order = ('utilitiesextensionele', 'datosdelsuministro', 'utilitiesmedida', 'utilitiesdesgloseconceptosfactura'
+    _sort_order = ('utilitiesextensionele', 'tipoextension', 'datosdelsuministro', 'utilitiesmedida', 'utilitiesdesgloseconceptosfactura'
                    , 'utilitieshistoricoconsumos', 'utilitiesmensajes', 'utilitiesatrasociado', 'utilitiescurva')
 
     def __init__(self):
         self.utilitiesextensionele = XmlField('UtilitiesExtensionELE')
+        self.tipoextension = XmlField('TipoExtension')
         self.datosdelsuministro = DatosDelSuministro()
         self.utilitiesmedida = UtilitiesMedida()
         self.utilitiesdesgloseconceptosfactura = UtilitiesDesgloseConceptosFactura()
