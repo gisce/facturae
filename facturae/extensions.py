@@ -394,7 +394,7 @@ class LineasMedidaContador(XmlModel):
 
 class LineaMedidaContador(XmlModel):
 
-    _sort_order = ('lineamedidacontador')
+    _sort_order = ('lineamedidacontador',)
 
     def __init__(self):
         self.lineamedidacontador = XmlField('LineaMedidaContador')
