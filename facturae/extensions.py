@@ -382,11 +382,11 @@ class DetallePeriodo(XmlModel):
 
 class LineasMedidaContador(XmlModel):
 
-    _sort_order = ('lineasmedidacontador', 'lineamedidacontador')
+    _sort_order = ('lineasmedidacontador', 'lineamedidacontador_list')
 
     def __init__(self):
         self.lineasmedidacontador = XmlField('LineasMedidaContador')
-        self.lineamedidacontador = []
+        self.self.lineamedidacontador_list = []
         super(LineasMedidaContador, self).__init__('LineasMedidaContador', 'lineasmedidacontador', drop_empty=False)
 
 # 2.2
