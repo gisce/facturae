@@ -387,7 +387,7 @@ class LineasMedidaContador(XmlModel):
     def __init__(self):
         self.lineasmedidacontador = XmlField('LineasMedidaContador')
         self.lineamedidacontador = []
-        super(LineasMedidaContador, self).__init__('LineasMedidaContador', 'lineasmedidacontador')
+        super(LineasMedidaContador, self).__init__('LineasMedidaContador', 'lineasmedidacontador', drop_empty=False)
 
 # 2.2
 
@@ -398,7 +398,7 @@ class LineaMedidaContador(XmlModel):
 
     def __init__(self):
         self.lineamedidacontador = XmlField('LineaMedidaContador')
-        super(LineaMedidaContador, self).__init__('LineaMedidaContador', 'lineamedidacontador')
+        super(LineaMedidaContador, self).__init__('LineaMedidaContador', 'lineamedidacontador', drop_empty=False)
 
 # 2.2
 
