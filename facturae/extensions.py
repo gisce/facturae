@@ -496,11 +496,11 @@ class UtilitiesAtrAsociado(XmlModel):
 
 class UtilitiesCurva(XmlModel):
 
-    _sort_order = ('utilitiescurva', 'CurvaDiaria')
+    _sort_order = ('utilitiescurva', 'curvadiaria')
 
     def __init__(self):
         self.utilitiescurva = XmlField('UtilitiesCurva')
-        self.CurvaDiaria = []
+        self.curvadiaria = []
         super(UtilitiesCurva, self).__init__('UtilitiesCurva', 'utilitiescurva')
 
 # 2.2
@@ -508,12 +508,12 @@ class UtilitiesCurva(XmlModel):
 
 class CurvaDiaria(XmlModel):
 
-    _sort_order = ('curvadiaria', 'fechacurva', 'DatosCurva')
+    _sort_order = ('curvadiaria', 'fechacurva', 'datoscurva')
 
     def __init__(self):
         self.curvadiaria = XmlField('CurvaDiaria')
         self.fechacurva = XmlField('FechaCurva')
-        self.DatosCurva = DatosCurva()
+        self.datoscurva = DatosCurva()
         super(CurvaDiaria, self).__init__('CurvaDiaria', 'curvadiaria')
 
 # 2.2
