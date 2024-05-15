@@ -23,7 +23,9 @@ class UtilitiesExtensionsELE(XmlModel):
     _sort_order = ('utilitiesextensionsele', 'version', 'utilitiesfacturaresumen', 'utilitiesextensionele')
 
     def __init__(self):
-        self.utilitiesextensionsele = XmlField('UtilitiesExtensionsELE')
+        nsmap = {'utilities': 'http://www.facturae.es/Facturae/Extensions/Utilities'}
+
+        self.utilitiesextensionsele = XmlField('UtilitiesExtensionsELE', namespace=nsmap['utilities'])
         self.version = XmlField('Version')
         self.utilitiesfacturaresumen = UtilitiesFacturaResumen()
         self.utilitiesextensionele = UtilitiesExtensionELE()

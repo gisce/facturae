@@ -9,10 +9,13 @@ from . import extensions
 class FacturaeRoot(XmlModel):
     _sort_order = ('root', 'fileheader', 'parties', 'invoices', 'extensions')
 
-    def __init__(self):
+    def __init__(self, utilities=False):
 
         nsmap = {'ds': 'http://www.w3.org/2000/09/xmldsig#',
                  'fe': 'http://www.facturae.es/Facturae/2014/v3.2.1/Facturae'}
+
+        if utilities:
+            nsmap['utilities'] = 'http://www.facturae.es/Facturae/Extensions/Utilities'
 
         self.root = XmlField('Facturae', namespace=nsmap['fe'],
                              attributes={'nsmap': nsmap})
