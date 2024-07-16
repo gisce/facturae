@@ -4,7 +4,7 @@ from facturae.facturae_parser import FacturaeParser
 
 with description('Facturae Invoice'):
     with before.each:
-        with open('./specs/assets/facturae.xsig', 'r') as f:
+        with open('./specs/assets/facturae.xsig', 'rb') as f:
             xml_data = f.read()
             self.facturae = FacturaeParser(xml_data)
 
