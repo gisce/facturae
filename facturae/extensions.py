@@ -51,7 +51,7 @@ class UtilitiesFacturaResumen(XmlModel):
 
 class ConceptosFR(XmlModel):
 
-    _sort_order = ('conceptosfr', 'conceptofr', )
+    _sort_order = ('conceptosfr', 'conceptofr')
 
     def __init__(self):
         self.conceptosfr = XmlField('ConceptosFR')
@@ -63,9 +63,10 @@ class ConceptosFR(XmlModel):
 
 class ConceptoFR(XmlModel):
 
-    _sort_order = ('conceptofacturadofr', 'tipoconceptofacturadofr', 'importe')
+    _sort_order = ('conceptofr', 'conceptofacturadofr', 'tipoconceptofacturadofr', 'importe')
 
     def __init__(self):
+        self.conceptofr = XmlField('ConceptoFR')
         self.conceptofacturadofr = XmlField('ConceptoFacturadoFR')
         self.tipoconceptofacturadofr = XmlField('TipoConceptoFacturadoFR')
         self.importe = XmlField('Importe')
