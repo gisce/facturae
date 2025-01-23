@@ -325,7 +325,7 @@ class Corrective(XmlModel):
 
 class TaxPeriod(XmlModel):
 
-    _sort_order = ()
+    _sort_order = ('taxperiod', 'startdate', 'enddate')
 
     def __init__(self):
         self.taxperiod = XmlField('TaxPeriod')
