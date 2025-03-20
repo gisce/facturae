@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from cryptography.hazmat.primitives import serialization
-from cryptography.hazmat.primitives.serialization import pkcs12
+from OpenSSL import crypto
 
 class FacturaeUtils(object):
 
@@ -15,17 +14,14 @@ class FacturaeUtils(object):
         assert passwd, "Passwd must be provided"
 
         try:
-            private_key, certificate, additional_certificates = pkcs12.load_key_and_certificates(
-                pk, passwd)
+            p12 = crypto.load_pkcs12(pk, passwd)
 
-            priv_key = private_key.private_bytes(
-                encoding=serialization.Encoding.PEM,
-                format=serialization.PrivateFormat.PKCS8,
-                encryption_algorithm=serialization.NoEncryption()
+            priv_key = crypto.dump_privatekey(
+                crypto.FILETYPE_PEM, p12.get_privatekey()
             )
 
-            cert = certificate.public_bytes(
-                serialization.Encoding.PEM
+            cert = crypto.dump_certificate(
+                crypto.FILETYPE_PEM, p12.get_certificate()
             )
 
             return priv_key, cert
