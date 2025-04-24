@@ -12,7 +12,7 @@ class FacturaeRoot(XmlModel):
     def __init__(self, utilities=False):
 
         nsmap = {'ds': 'http://www.w3.org/2000/09/xmldsig#',
-                 'fe': 'http://www.facturae.es/Facturae/2014/v3.2.1/Facturae'}
+                 'fe': 'http://www.facturae.gob.es/formato/Versiones/Facturaev3_2_2.xml'}
 
         if utilities:
             nsmap['utilities'] = 'http://www.facturae.es/Facturae/Extensions/Utilities'
@@ -304,7 +304,7 @@ class Corrective(XmlModel):
     _sort_order = ('corrective', 'invoicenumber', 'invoiceseriescode',
                    'reasoncode', 'reasondescription', 'taxperiod',
                    'correctionmethod', 'correctionmethoddescription',
-                   'additionalreasondescription')
+                   'additionalreasondescription', 'invoiceissuedate')
 
     def __init__(self):
         self.corrective = XmlField('Corrective')
@@ -314,10 +314,9 @@ class Corrective(XmlModel):
         self.reasondescription = XmlField('ReasonDescription')
         self.taxperiod = TaxPeriod()
         self.correctionmethod = XmlField('CorrectionMethod')
-        self.correctionmethoddescription = XmlField(
-                                            'CorrectionMethodDescription')
-        self.additionalreasondescription = XmlField(
-                                            'AdditionalReasonDescription')
+        self.correctionmethoddescription = XmlField('CorrectionMethodDescription')
+        self.additionalreasondescription = XmlField('AdditionalReasonDescription')
+        self.invoiceissuedate = XmlField('InvoiceIssueDate')
         super(Corrective, self).__init__('Corrective', 'corrective')
 
 # 3.1.1.5.5
@@ -340,7 +339,9 @@ class InvoiceIssueData(XmlModel):
 
     _sort_order = ('invoiceissuedata', 'issuedate', 'operationdate',
                    'placeofissue', 'invoicingperiod', 'invoicecurrencycode',
-                   'exchangeratedetails', 'taxcurrencycode', 'languagename')
+                   'exchangeratedetails', 'taxcurrencycode', 'languagename',
+                   'invoicedescription', 'receivertransactionreference',
+                   'filereference', 'receivercontractreference')
 
     def __init__(self):
         self.invoiceissuedata = XmlField('InvoiceIssueData')
@@ -352,6 +353,11 @@ class InvoiceIssueData(XmlModel):
         self.exchangeratedetails = ExchangeRateDetails()
         self.taxcurrencycode = XmlField('TaxCurrencyCode')
         self.languagename = XmlField('LanguageName')
+        self.invoicedescription = XmlField('InvoiceDescription')
+        self.receivertransactionreference = XmlField('ReceiverTransactionReference')
+        self.filereference = XmlField('FileReference')
+        self.receivercontractreference = XmlField('ReceiverContractReference')
+
         super(InvoiceIssueData, self).__init__('InvoiceIssueData',
                                                'invoiceissuedata')
 
@@ -461,7 +467,7 @@ class InvoiceTotals(XmlModel):
                    'subsidies', 'totalfinancialexpenses',
                    'totaloutstandingamount', 'totalpaymentsonaccount',
                    'amountswithheld', 'totalexecutableamount',
-                   'totalreinbursableexpenses')
+                   'totalreinbursableexpenses', 'paymentinkind')
 
     def __init__(self):
         self.invoicetotals = XmlField('InvoiceTotals')
@@ -490,7 +496,8 @@ class InvoiceTotals(XmlModel):
         self.amountswithheld = AmountsWithheld()
         self.totalexecutableamount = XmlField('TotalExecutableAmount',
                                               rep=lambda x: '%.2f' % x)
-        self.totalreinbursableexpenses = XmlField('TotalReinbursableExpenses')
+        self.totalreimbursableexpenses = XmlField('TotalReimbursableExpenses')
+        self.paymentinkind = PaymentInKind()
         super(InvoiceTotals, self).__init__('InvoiceTotals',
                                             'invoicetotals')
 
@@ -673,6 +680,20 @@ class AmountsWithheld(XmlModel):
         self.withholdingamount = XmlField('WithholdingAmount')
         super(AmountsWithheld, self).__init__('AmountsWithheld',
                                               'amountswithheld')
+
+# 3.1.5.19
+
+
+class PaymentInKind(XmlModel):
+
+    _sort_order = ('paymentinkind', 'paymentinkindreason', 'paymentinkindamount')
+
+    def __init__(self):
+        self.paymentinkind = XmlField('PaymentInKind')
+        self.paymentinkindreason = XmlField('PaymentInKindReason')
+        self.paymentinkindamount = XmlField('PaymentInKindAmount')
+        super(PaymentInKind, self).__init__('PaymentInKind',
+                                              'paymentinkind')
 
 # 3.1.6
 
