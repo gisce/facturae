@@ -75,12 +75,12 @@ class FileHeader(XmlModel):
 
 class Individual(XmlModel):
 
-    _sort_order = ('name', 'firstsurname', 'secondsurname',
+    _sort_order = ('individual', 'givenname', 'firstsurname', 'secondsurname',
                    'addressinspain', 'contactdetails')
 
     def __init__(self):
         self.individual = XmlField('Individual')
-        self.name = XmlField('Name')
+        self.givenname = XmlField('Name')
         self.firstsurname = XmlField('FirstSurname')
         self.secondsurname = XmlField('SecondSurname')
         self.addressinspain = AddressInSpain()
@@ -143,7 +143,8 @@ class Parties(XmlModel):
 class Party(XmlModel):
 
     _sort_order = ('party', 'taxidentification',
-                   'administrativecentres', 'legalentity')
+                   'administrativecentres', 'legalentity',
+                   'individual')
 
     def __init__(self, tag):
         self.party = XmlField(tag)
