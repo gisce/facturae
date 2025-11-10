@@ -888,14 +888,10 @@ class LegalLiterals(XmlModel):
 # 3.1.8.1
 
 
-class LegalReference(XmlModel):
+class LegalReference(XmlField):
 
-    _sort_order = ('legalreference')
-
-    def __init__(self):
-        self.legalreference = XmlField('LegalReference')
-        super(LegalReference, self).__init__('LegalReference',
-                                             'legalreference')
+    def __init__(self, value=None):
+        super(LegalReference, self).__init__('LegalReference', value=value)
 
 # 3.1.9
 
