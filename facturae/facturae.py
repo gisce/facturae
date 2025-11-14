@@ -71,6 +71,22 @@ class FileHeader(XmlModel):
         self.batch = Batch()
         super(FileHeader, self).__init__('FileHeader', 'root')
 
+# 1.4.2.2
+
+class Individual(XmlModel):
+
+    _sort_order = ('individual', 'givenname', 'firstsurname', 'secondsurname',
+                   'addressinspain', 'contactdetails')
+
+    def __init__(self):
+        self.individual = XmlField('Individual')
+        self.givenname = XmlField('Name')
+        self.firstsurname = XmlField('FirstSurname')
+        self.secondsurname = XmlField('SecondSurname')
+        self.addressinspain = AddressInSpain()
+        self.contactdetails = ContactDetails()
+        super(Individual, self).__init__('Individual', 'individual')
+
 # 1.5
 
 
@@ -127,13 +143,15 @@ class Parties(XmlModel):
 class Party(XmlModel):
 
     _sort_order = ('party', 'taxidentification',
-                   'administrativecentres', 'legalentity')
+                   'administrativecentres', 'legalentity',
+                   'individual')
 
     def __init__(self, tag):
         self.party = XmlField(tag)
         self.taxidentification = TaxIdentification()
         self.administrativecentres = AdministrativeCentres()
         self.legalentity = LegalEntity()
+        self.individual = Individual()
         super(Party, self).__init__(tag, 'party')
 
 # 2.1.1

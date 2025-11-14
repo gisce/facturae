@@ -88,6 +88,8 @@ class FacturaeParser(object):
 
         tax_identification = party.find('TaxIdentification')
         legal_entity = party.find('LegalEntity')
+        individual = party.find('Individual')
+        party_address = None
 
         if tax_identification is not None:
             res.update({
@@ -109,21 +111,33 @@ class FacturaeParser(object):
 
             party_address = legal_entity.find('AddressInSpain')
 
-            if party_address is not None:
-                res.update({
-                    'Address': {
-                        'Street': party_address.Address.text if party_address.find(
-                            'Address') is not None else False,
-                        'PostCode': party_address.PostCode.text if party_address.find(
-                            'PostCode') is not None else False,
-                        'Town': party_address.Town.text if party_address.find(
-                            'Town') is not None else False,
-                        'Province': party_address.Province.text if party_address.find(
-                            'Province') is not None else False,
-                        'CountryCode': party_address.CountryCode.text if party_address.find(
-                            'CountryCode') is not None else False,
-                    }
-                })
+        if individual is not None:
+            res.update({
+                'Name': individual.Name.text if individual.find(
+                    'Name') is not None else False,
+                'FirstSurname': individual.FirstSurname.text if individual.find(
+                    'FirstSurname') is not None else False,
+                'SecondSurname': individual.SecondSurname.text if individual.find(
+                    'SecondSurname') is not None else False,
+            })
+
+            party_address = individual.find('AddressInSpain')
+
+        if party_address is not None:
+            res.update({
+                'Address': {
+                    'Street': party_address.Address.text if party_address.find(
+                        'Address') is not None else False,
+                    'PostCode': party_address.PostCode.text if party_address.find(
+                        'PostCode') is not None else False,
+                    'Town': party_address.Town.text if party_address.find(
+                        'Town') is not None else False,
+                    'Province': party_address.Province.text if party_address.find(
+                        'Province') is not None else False,
+                    'CountryCode': party_address.CountryCode.text if party_address.find(
+                        'CountryCode') is not None else False,
+                }
+            })
 
         return res
 
