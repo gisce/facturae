@@ -3,7 +3,7 @@
 from libcomxml.core import XmlModel, XmlField
 from .utils import FacturaeUtils
 from signxml import XMLSigner, XMLVerifier
-from xml.etree import ElementTree
+from lxml import etree as ElementTree
 from . import extensions
 
 class FacturaeRoot(XmlModel):
@@ -41,7 +41,7 @@ class FacturaeRoot(XmlModel):
         root = ElementTree.fromstring(xml)
         signed_root = XMLSigner().sign(root, key=pkcs12_key, cert=pkcs12_cert)
 
-        string_signed_root = ElementTree.tostring(signed_root, encoding='utf8',
+        string_signed_root = ElementTree.tostring(signed_root, encoding='unicode',
                                                   method='xml').replace("\n","")
 
 

@@ -1,5 +1,7 @@
-lxml
+lxml<5;python_version<"3"
+lxml>=4.2.1;python_version>="3"
 libcomxml
-signxml<=2.8.2;python_version<="2.7.18"
-signxml;python_version>"2.7.18"
-crypto
+cryptography==3.3.2;python_version<"3"
+cryptography>=3.3.2;python_version>="3"
+signxml==2.9.0;python_version<"3"
+signxml>=4,<5;python_version>="3"

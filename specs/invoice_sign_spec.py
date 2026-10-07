@@ -5,6 +5,8 @@ sys.path.insert(0, '.')
 
 from facturae import facturae
 import signxml
+from cryptography.hazmat.primitives import serialization
+from cryptography.hazmat.primitives.serialization import pkcs12
 import specs as test_data
 
 import logging
@@ -35,7 +37,7 @@ with description('Invoice'):
         })
 
         assert test_data.CERTIFICATE and test_data.CERTIFICATE_PASSWD and test_data.CERTIFICATE_PUBLIC
-        self.certificate = open(test_data.CERTIFICATE).read()
+        self.certificate = open(test_data.CERTIFICATE, 'rb').read()
         self.certificate_public = clean_cert_str(open(test_data.CERTIFICATE_PUBLIC).read())
         self.password = test_data.CERTIFICATE_PASSWD
 
@@ -46,18 +48,22 @@ with description('Invoice'):
             # [!] Public component of provided cert must be inside the signed XML
             assert self.certificate_public in signed, "Expected current certificate '{}' must be inside the signed Invoice".format(test_data.CERTIFICATE_PUBLIC)
 
-            # [!] Sign verification must be accomplished, but must raise
-            #  InvalidCertificate for this self-signed cert test
-            works = False
-            try:
-                assert self.invoice.sign_verify(signed)
-                works = True
-            except signxml.exceptions.InvalidCertificate as invalid_cert:
-                # Handle self-signed certs
-                if invalid_cert[0].message[2] == "self signed certificate":
-                    works = True
-            except Exception as e:
-                raise e
-                works = False
+            _key, certificate, _chain = pkcs12.load_key_and_certificates(
+                self.certificate,
+                self.password.encode('utf-8'),
+            )
+            verified = signxml.XMLVerifier().verify(
+                signed,
+                x509_cert=certificate.public_bytes(
+                    serialization.Encoding.PEM
+                ),
+            )
+            assert verified.signed_xml is not None
 
-            assert works, "Sign verification must be accomplished"
+        with it('must report an invalid PKCS12 password'):
+            try:
+                self.invoice.sign(self.certificate, 'invalid-password')
+            except ValueError:
+                pass
+            else:
+                raise AssertionError("An invalid PKCS12 password must fail")
