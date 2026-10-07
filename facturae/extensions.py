@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from libcomxml.core import XmlModel, XmlField
-from .utils import FacturaeUtils
-from signxml import XMLSigner, XMLVerifier
-from xml.etree import ElementTree
 
 
 class Extensions(XmlModel):
@@ -535,7 +532,6 @@ class DatosCurva(XmlModel):
         super(DatosCurva, self).__init__('DatosCurva', 'datoscurva')
 
 # 2.2
-
 
 
 
