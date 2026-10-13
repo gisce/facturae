@@ -1,3 +1,7 @@
+# Unreleased
+- Support pyOpenSSL 20 and newer without relying on its removed PKCS#12 API.
+- Verify generated XML signatures against the certificate contained in the PFX.
+
 # 0.2
 - Add FacturaeRoot signature functionality
   - New methods

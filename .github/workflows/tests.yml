@@ -1,0 +1,31 @@
+name: Tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    name: Python ${{ matrix.python }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - python: "2.7"
+            image: python:2.7-buster
+            pyopenssl: pyOpenSSL==20.0.1
+          - python: "3.11"
+            image: python:3.11-bookworm
+            pyopenssl: pyOpenSSL>=20
+    container: ${{ matrix.image }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt -r requirements-dev.txt
+          pip install "${{ matrix.pyopenssl }}"
+      - name: Show compatibility versions
+        run: pip freeze | grep -E "^(cryptography|pyOpenSSL|signxml)=="
+      - name: Run tests
+        run: mamba .

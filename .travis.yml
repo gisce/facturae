@@ -5,6 +5,8 @@ python:
 before_install:
   - 'pip install -r requirements.txt'
   - 'pip install -r requirements-dev.txt'
+  - 'pip install pyOpenSSL==20.0.1'
+  - 'pip freeze | grep -E "^(cryptography|pyOpenSSL|signxml)=="'
 
 script: 'mamba .' 
 
